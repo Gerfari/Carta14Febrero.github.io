@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitacion San Valentin</title>
+    <style>
+        body {
+            background-image: url('fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Candara', 'Comic Sans MS', Helvetica;
+        }
+
+        .titulo,.subtitulo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: aliceblue;
+            text-shadow: rgb(147, 0, 0) 1px 2px 5px;
+        }
+
+        .imagenes {
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+        }
+
+        .botones {
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20%;
+        }
+
+        .boton {
+            width: 25%;
+            padding: 10px 20px;
+            white-space: nowrap;
+            /* Evita que el texto se divida en varias líneas */
+            text-align: center;
+            /* Alinea el texto al centro */
+        }
+
+        h1 {
+            font-size: xx-large;
+        }
+
+        #botonNo {
+            width: auto;
+            /* Ajusta el tamaño del botón para que sea más grande */
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+
+        /*
+#botonNo:active{
+    transform: scale(1.2);
+}*/
+    </style>
+    <!--LINK PARA PONERLE ICONO A LA PAGINA WEB-->
+    <link rel="shortcut icon" href="img/icono.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="titulo">
+            <h1 id="title">¿Puedo ser su San Valentin?</h1>
+        </div>
+        <div class="subtitulo">
+            <h2 id="mensaje"></h2>
+        </div>
+        <div class="imagenes">
+            <img id="imagen" src="1.gif" alt="imgrandom" width="30%">
+        </div>
+        <div class="botones">
+            <input type="button" id="botonSi" value="Si" class="btn btn-success boton">
+            <input type="button" id="botonNo" value="No" class="btn btn-danger boton">
+        </div>
+    </div>
+    <script>
+        const frases = [
+            "¿Segura?", "¿Estás 100% segura?", "¿Te lo has pensado bien?", "¡Mira que podemos pasarla increíble!",
+            "¡No te arrepientas después!", "¿Segurisita de tu decisión?", "¡Estás segura de que quieres decir eso?",
+            "¿De verdad lo piensas hacer?", "¿En serio no te lo piensas pensar dos veces?", "¡Podemos pasarla fenomenal, eh!",
+            "¡Va a ser lo mejor, te lo prometo!", "¿Por qué no le das una oportunidad a la diversión?", "¡Te vas a divertir más de lo que imaginas!",
+            "¡Solo piensa en lo bien que la vamos a pasar!", "¿Estás lista para lo épico?", "¡Tienes que decir sí para que sea legendario!",
+            "¡Te estoy diciendo que va a estar de lujo!", "¡Yo te avisé, va a ser brutal!", "¿Quién puede resistirse a pasarla bien?",
+            "¡Solo una vez en la vida!", "¡La vas a pasar increíble, ya verás!", "¡Vamos, no te vas a arrepentir!",
+            "¡Es ahora o nunca!", "¡Te vas a sorprender de lo que puede pasar!", "¡No te lo puedes perder!",
+            "¡Es la oportunidad perfecta para divertirse!", "¡Te prometo que no te arrepentirás!",
+            "¡Esta es la mejor decisión que vas a tomar hoy!", "¡No hay vuelta atrás, solo diversión!", "¡Vas a ver lo que es pasarla bien!", "Si presionas de nuevo aca me debes un beso"
+        ];
+        const frasesSi = [
+            "¡Claro que sí!", "¡Obvio!", "¡Me haría muy feliz!", "¡Por supuesto!", "¡Sin duda!",
+            "¡Qué alegría!", "¡Sí, claro!", "¡Totalmente!", "¡Claro!", "¡Con gusto!",
+            "¡Por supuesto que sí!", "¡Me encanta la idea!", "¡Estaría encantada!", "¡Claro que sí, seguro!", "¡Sería genial!"
+        ];
+
+        const boton = document.getElementById("botonNo");
+        const botonSi = document.getElementById("botonSi");
+        const imagen=document.getElementById("imagen");
+        const tit=document.getElementById("title");
+        const mensaje=document.getElementById("mensaje");
+
+        let escala = 1;
+        botonSi.addEventListener("click",()=>{
+            tit.textContent="Sabia que diria que siiii🥰";
+            mensaje.textContent="La veo el viernes para almorzar juntos😘";
+            imagen.src="imgsi.gif";
+            botonNo.style.display="none";
+            botonSi.style.display="none";
+        });
+        boton.addEventListener("click", () => {
+            boton.style.position = "absolute";
+
+            let currentScale = parseFloat(botonNo.style.transform.replace('scale(', '').replace(')', '')) || 1;
+            currentScale *= 0.9;
+            if (escala <= 4.6) {
+                escala += 0.2;
+                botonSi.style.transform = `scale(${escala})`;
+                console.log("escala" + escala);
+            }
+
+
+            const anchoVentana = window.innerWidth;
+            const altoVentana = window.innerHeight;
+            const nuevax = Math.random() * (anchoVentana - boton.offsetWidth);
+            const nuevay = Math.random() * (altoVentana - boton.offsetHeight);
+
+            boton.style.left = `${nuevax}px`;
+            boton.style.top = `${nuevay}px`;
+            boton.style.transform = `scale(${currentScale})`;
+            boton.style.transition = "transform 0.2s ease";
+            boton.value = frases[Math.floor(Math.random() * frases.length)];
+            botonSi.value=frasesSi[Math.floor(Math.random()*frasesSi.length)];
+            imagen.src=""+(Math.floor(Math.random()*6)+1)+".gif";
+        });
+
+
+    </script>
+
+</body>
+
+</html>
